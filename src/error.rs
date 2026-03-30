@@ -5,6 +5,8 @@ pub enum StandupError {
     Git(git2::Error),
     InvalidDate(String),
     NoRepoFound(String),
+    Config(String),
+    Llm(String),
 }
 
 impl fmt::Display for StandupError {
@@ -15,6 +17,8 @@ impl fmt::Display for StandupError {
             StandupError::NoRepoFound(path) => {
                 write!(f, "No git repository found at: {}", path)
             }
+            StandupError::Config(msg)=>write!(f,"Config error : {}", msg),
+            StandupError::Llm(msg)=>write!(f,"LLM Error : {}", msg),
         }
     }
 }
